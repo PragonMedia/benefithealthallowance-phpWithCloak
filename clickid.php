@@ -5,9 +5,7 @@
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 /* --- Config --- */
-$cmpId = "68d5831106c8fccd28e51f50";
-
-
+$cmpId = "686521af0ee01d9295078a90";
 
 const SESSION_KEY  = 'rt_clickid';
 const SESSION_TTL  = 6 * 3600;                // 6h cache
