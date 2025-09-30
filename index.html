@@ -66,19 +66,15 @@
           if (clickRes.phone_number) {
             window.dynamicPhoneNumber = clickRes.phone_number;
             console.log("Phone number from clickid:", clickRes.phone_number);
-            
+
             // Update phone number display immediately
             const phoneElement = document.getElementById("phone-number");
             if (phoneElement) {
               // Check if this is the monitoring number (cloaked)
               if (clickRes.phone_number === "+18335942920") {
-                phoneElement.innerHTML = "+1 (833) 594-2920 <span style='color: red; font-size: 0.8em;'>[CLOAKED]</span>";
-                phoneElement.style.color = "red";
-                phoneElement.style.fontWeight = "bold";
+                phoneElement.textContent = "+1 (833) 594-2920";
               } else {
-                phoneElement.innerHTML = "+1 (321) 398-0346";
-                phoneElement.style.color = "inherit";
-                phoneElement.style.fontWeight = "normal";
+                phoneElement.textContent = "+1 (321) 398-0346";
               }
               phoneElement.href = `tel:${clickRes.phone_number}`;
             }
