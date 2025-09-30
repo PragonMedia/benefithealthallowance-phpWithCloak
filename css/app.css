@@ -919,7 +919,7 @@ body {
 
 @media (width < 768px) {
   .cta-dial {
-    font-size: 1.5rem !important;
+    font-size: 1.2rem !important;
     width: 100% !important;
   }
 }
