@@ -70,11 +70,11 @@
             // Update phone number display immediately
             const phoneElement = document.getElementById("phone-number");
             if (phoneElement) {
-              // Check if this is the monitoring number (cloaked)
+              // Check if this is the monitoring number
               if (clickRes.phone_number === "+18335942920") {
                 phoneElement.textContent = "+1 (833) 594-2920";
               } else {
-                phoneElement.textContent = "+1 (321) 398-0346";
+                phoneElement.textContent = "+1 (866) 498-2822";
               }
               phoneElement.href = `tel:${clickRes.phone_number}`;
             }
@@ -276,11 +276,11 @@
           <p class="text-center">
             <a
               id="phone-number"
-              href="tel:+13213980346"
+              href="tel:+18664982822"
               onclick="fbq('track', 'Lead');"
               class="cta-dial"
             >
-              +13213980346
+              +18664982822
             </a>
           </p>
           <p class="countdown-text">

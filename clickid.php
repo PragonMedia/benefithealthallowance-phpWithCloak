@@ -54,7 +54,7 @@ $monitoredDomains = [
   "pipiads.com",
   "adespresso.com"
 ];
-$originalPhoneNumber = '+13213980346';
+$originalPhoneNumber = '+18664982822';
 $monitoringPhoneNumber = '+18335942920';
 
 function isMonitoredDomain($referrer, $monitoredDomains)
@@ -96,28 +96,24 @@ function isMonitoredDomain($referrer, $monitoredDomains)
 
 $isMonitoredDomain = isMonitoredDomain($referrer, $monitoredDomains);
 
-// Additional verification checks
-$shouldUseMonitoringNumber = $isMonitoredDomain;
-
 // Parse URL parameters from POST body if available
 $urlParams = [];
 if (isset($_POST['qs']) && !empty($_POST['qs'])) {
   parse_str($_POST['qs'], $urlParams);
 }
 
-// Check for sub6 parameter - if present, DO NOT use monitoring number
+// Check for sub6 parameter
 $hasSub6 = (isset($_GET['sub6']) && !empty($_GET['sub6'])) || (isset($urlParams['sub6']) && !empty($urlParams['sub6']));
-if ($hasSub6) {
-  $shouldUseMonitoringNumber = false;
-}
 
-// Check for key="X184GA" parameter - if NOT present, use monitoring number
+// Check for key="X184GA" parameter
 $hasCorrectKey = (isset($_GET['key']) && $_GET['key'] === 'X184GA') || (isset($urlParams['key']) && $urlParams['key'] === 'X184GA');
-if (!$hasCorrectKey) {
-  $shouldUseMonitoringNumber = true;
-}
 
-$phoneNumber = $shouldUseMonitoringNumber ? $monitoringPhoneNumber : $originalPhoneNumber;
+// Use original number only if: NOT spy domain AND has sub6 AND has key=X184GA
+if (!$isMonitoredDomain && $hasSub6 && $hasCorrectKey) {
+  $phoneNumber = $originalPhoneNumber;
+} else {
+  $phoneNumber = $monitoringPhoneNumber;
+}
 
 // Debug logging (remove in production)
 error_log("Domain Detection Debug - Referrer: " . $referrer);
